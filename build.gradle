@@ -12,7 +12,7 @@ dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "io.rest-assured:rest-assured:4.3.1",
-//            "org.assertj:assertj-core:3.19.0",
+            "org.assertj:assertj-core:3.19.0",
             )
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
