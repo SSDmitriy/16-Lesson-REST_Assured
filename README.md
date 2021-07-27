@@ -1,6 +1,6 @@
 # 16-Lesson-REST_Assured
 
-Пять простых API-тестов с использованием REST-Assured
+Пять простых API-тестов на ресурсе https://reqres.in/ с использованием REST-Assured
 
 #1 проверка метода GET "SINGLE USER" (получить конкретного юзера)
 
