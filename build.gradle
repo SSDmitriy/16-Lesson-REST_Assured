@@ -13,6 +13,8 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "io.rest-assured:rest-assured:4.3.1",
             "org.assertj:assertj-core:3.19.0",
+            "com.codeborne:selenide:5.22.2",
+            "io.qameta.allure:allure-selenide:2.13.9",
             )
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
