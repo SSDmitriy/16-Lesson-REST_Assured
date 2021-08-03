@@ -1,5 +1,5 @@
-import io.restassured.http.Cookie;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,13 +17,14 @@ public class AddToCartTest {
 
         step("Получить токен авторизации", () -> {
 
-            String authorizationCookie =
+            String authorizationToken =
                     given()
                             .baseUri(BASE_URL)
                             .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                            //положить в корзину 2 товара
                             .body("product_attribute_16_5_4=14&product_attribute_16_6_5=15" +
-                                            "&product_attribute_16_3_6=18&product_attribute_16_4_7=44" +
-                                            "&product_attribute_16_8_8=22&addtocart_16.EnteredQuantity=1").
+                                    "&product_attribute_16_3_6=18&product_attribute_16_4_7=44" +
+                                    "&product_attribute_16_8_8=22&addtocart_16.EnteredQuantity=2").
                     when()
                             .post("addproducttocart/details/16/1").
                     then()
@@ -31,23 +32,22 @@ public class AddToCartTest {
                             .extract()
                             .cookie("Nop.customer");
 
-            step("Открыть картинку для инициализации сессии", () ->
-                    open("http://demowebshop.tricentis.com/Themes/DefaultClean/Content/images/logo.png")
+            step("Открыть любую картинку с сайта для инициализации сессии", () ->
+                open("http://demowebshop.tricentis.com/Themes/DefaultClean/Content/images/logo.png")
                 );
 
             step("Подставить куки в браузер", () ->
-                    getWebDriver().manage().addCookie(new Cookie("Nop.customer", authorizationCookie))
+                    getWebDriver().manage().addCookie(new Cookie("Nop.customer", authorizationToken))
                 );
         });
 
         step("Открыть сайт", () ->
                 open(BASE_URL)
-            );
+        );
 
         step("Проверить через UI количество товаров в корзине", () -> {
-            $(".cart-qty").shouldHave(text("1"));
+            //проверить, что в корзине 2 товара
+            $(".cart-qty").shouldHave(text("2"));
         });
     }
-
-
 }
